@@ -1,22 +1,48 @@
-class ElementalComparator:
-    empowers = {'金': '水', '水': '木', '木': '火', '火': '土', '土': '金'}
-    subdues = {'金': '木', '木': '土', '土': '水', '水': '火', '火': '金'}
+from Enums import ElementsEnum
+import HeavenlyStems
+import EarthlyBranches
 
-    def get_relation(self, primary, secondary):
-        if primary == secondary:
-            return f'{primary} is the same as {secondary}'
-        elif ElementalComparator.empowers[primary] == secondary:
-            return f'{primary} empowers {secondary}'
-        elif ElementalComparator.subdues[primary] == secondary:
-            return f'{primary} subdues {secondary}'
-        elif ElementalComparator.empowers[secondary] == primary:
-            return f'{secondary} empowers {primary}'
-        elif ElementalComparator.subdues[secondary] == primary:
-            return f'{secondary} subdues {primary}'
+
+class ElementalComparator:
+    empowers = {
+        ElementsEnum.METAL: ElementsEnum.WATER,
+        ElementsEnum.WATER: ElementsEnum.WOOD,
+        ElementsEnum.WOOD: ElementsEnum.FIRE,
+        ElementsEnum.FIRE: ElementsEnum.EARTH,
+        ElementsEnum.EARTH: ElementsEnum.METAL
+    }
+    subdues = {
+        ElementsEnum.METAL: ElementsEnum.WOOD,
+        ElementsEnum.WOOD: ElementsEnum.EARTH,
+        ElementsEnum.EARTH: ElementsEnum.WATER,
+        ElementsEnum.WATER: ElementsEnum.FIRE,
+        ElementsEnum.FIRE: ElementsEnum.METAL
+    }
+
+    def get_relation(self, primaryWord, secondaryWord):
+        if primaryWord.type() != secondaryWord.type():
+            return 'incompatible comparison'
+        primaryElement = primaryWord.element
+        secondaryElement = secondaryWord.element
+        if primaryElement == secondaryElement:
+            return f'{primaryElement} is the same as {secondaryElement}'
+        elif ElementalComparator.empowers[primaryElement] == secondaryElement:
+            return f'{primaryElement} empowers {secondaryElement}'
+        elif ElementalComparator.subdues[primaryElement] == secondaryElement:
+            return f'{primaryElement} subdues {secondaryElement}'
+        elif ElementalComparator.empowers[secondaryElement] == primaryElement:
+            return f'{secondaryElement} empowers {primaryElement}'
+        elif ElementalComparator.subdues[secondaryElement] == primaryElement:
+            return f'{secondaryElement} subdues {primaryElement}'
         else:
             return 'invalid input'
 
 
 c = ElementalComparator()
+zi = EarthlyBranches.Zi()
+chou = EarthlyBranches.Chou()
 
-print(c.get_relation('水', '火'))
+jia = HeavenlyStems.Jia()
+
+print(c.get_relation(jia, chou))
+print(c.get_relation(zi, chou))
