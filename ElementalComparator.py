@@ -4,6 +4,7 @@ import EarthlyBranches
 
 
 class ElementalComparator:
+    # 生
     empowers = {
         ElementsEnum.METAL: ElementsEnum.WATER,
         ElementsEnum.WATER: ElementsEnum.WOOD,
@@ -11,6 +12,7 @@ class ElementalComparator:
         ElementsEnum.FIRE: ElementsEnum.EARTH,
         ElementsEnum.EARTH: ElementsEnum.METAL
     }
+    # 克
     subdues = {
         ElementsEnum.METAL: ElementsEnum.WOOD,
         ElementsEnum.WOOD: ElementsEnum.EARTH,
@@ -25,15 +27,15 @@ class ElementalComparator:
         primaryElement = primaryWord.element
         secondaryElement = secondaryWord.element
         if primaryElement == secondaryElement:
-            return f'{primaryElement} is the same as {secondaryElement}'
+            return f'{primaryElement} 同 {secondaryElement}'
         elif ElementalComparator.empowers[primaryElement] == secondaryElement:
-            return f'{primaryElement} empowers {secondaryElement}'
+            return f'{primaryElement} 生 {secondaryElement}'
         elif ElementalComparator.subdues[primaryElement] == secondaryElement:
-            return f'{primaryElement} subdues {secondaryElement}'
+            return f'{primaryElement} 克 {secondaryElement}'
         elif ElementalComparator.empowers[secondaryElement] == primaryElement:
-            return f'{secondaryElement} empowers {primaryElement}'
+            return f'{secondaryElement} 生 {primaryElement}'
         elif ElementalComparator.subdues[secondaryElement] == primaryElement:
-            return f'{secondaryElement} subdues {primaryElement}'
+            return f'{secondaryElement} 克 {primaryElement}'
         else:
             return 'invalid input'
 
@@ -43,6 +45,7 @@ zi = EarthlyBranches.Zi()
 chou = EarthlyBranches.Chou()
 
 jia = HeavenlyStems.Jia()
-
-print(c.get_relation(jia, chou))
-print(c.get_relation(zi, chou))
+yi = HeavenlyStems.Yi()
+xin = HeavenlyStems.Xin()
+print(c.get_relation(jia, xin))
+#print(c.get_relation(zi, chou))
